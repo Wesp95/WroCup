@@ -31,6 +31,10 @@ case "$1" in
         ;;
 esac
 
+     # Create a backup of groups.html before making changes
+    cp ./html/groups.html ./html/backup/groups.html.onestepback
+
+
 name=$(echo "$file" | sed -E 's/[ ()0-9]//g')
 #---------------------
 
@@ -44,8 +48,6 @@ while IFS= read -r line; do
 
     # Check if the line number is not empty and if the current line differs from the corresponding line in groups.html
     if [ -n "$line_number" ] && [ "$line" != "$(sed -n "${line_number}p" ./html/groups.html)" ]; then
-        # Create a backup of groups.html before making changes
-        cp ./html/groups.html ./html/backup/groups.html.onestepback
 
         # Replace the line in groups.html at the specified line number with the current line
         sed -i "${line_number}c\\$line" ./html/groups.html

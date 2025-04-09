@@ -1,0 +1,4 @@
+<tr><td>MONAR</td><td>0</td><td>3</td><td>6</td><td>0</td><td>-3</td></tr>
+<tr><td>BELGIUM</td><td>0</td><td>6</td><td>0</td><td>0</td><td>6</td></tr>
+<tr><td>AUSTRIA</td><td>5</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>BRAT ALBERT</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>

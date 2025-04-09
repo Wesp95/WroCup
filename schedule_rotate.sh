@@ -5,6 +5,10 @@ if [ $# -lt 2 ]; then
     exit 1
 fi
 
+
+cp ./html/index.html ./html/backup/index.html.onestepback
+cp ./html/history.html ./html/backup/history.html.onestepback
+
 main_html="./html/index.html"
 history_html="./html/history.html"
 # Extract the first item from the "Schedule" table
@@ -29,9 +33,10 @@ sed -i "/<h2>Schedule/,/<\/table>/ {
 }" "$main_html"
 }
 
-
-cp ./html/index.html ./html/backup/index.html.onestepback
-cp ./html/history.html ./html/backup/history.html.onestepback
+upload_function(){
+    aws s3 cp ./html/index.html s3://wroclawcup2025
+    aws s3 cp ./html/history.html s3://wroclawcup2025
+}
 
 
 if [ -n "$3" ]; then
@@ -43,7 +48,7 @@ current_match=$(echo "$clean_current_match" | sed "s/$word/<b>${word}*<\/b>/g; s
  sed -i "/<\/table>/i $current_match" "$history_html"
 
 change_function
-sh ./scripts/upload.sh 
+upload_function
  exit 1
             ;;
             # Append the current match to the "History" section in history.html when in penalties win Team B
@@ -53,7 +58,7 @@ current_match=$(echo "$clean_current_match" | sed "s/$word/<b>${word}*<\/b>/g; s
  sed -i "/<\/table>/i $current_match" "$history_html"
 
 change_function
-sh ./scripts/upload.sh 
+upload_function
  exit 1
             ;;
         *)
@@ -73,4 +78,4 @@ else
 fi
 
 change_function
-sh ./scripts/upload.sh 
+upload_function
